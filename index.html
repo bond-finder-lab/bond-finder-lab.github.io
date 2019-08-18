@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<title>Какие облигации покупать на ИИС?</title>
+<meta name="theme-color" content="#343a40">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="bootstrap.min.css">
+<link rel="stylesheet" href="index.css">
+<link rel="icon" href="favicon.png" sizes="32x32">
+<body class="bg-dark">
+<svg id="bond-finder-loading" viewBox="22 22 44 44">
+  <circle id="bond-finder-loading-glyph" cx="44" cy="44" r="19.8" fill="none" stroke-width="4.4"></circle>
+</svg>
+  <div class="container" id="vue-root" style="display: none">
+    <div class="row no-gutters mt-2">
+      <div class="col-lg-4">
+        <div class="card mb-2 mr-lg-2">
+          <div class="card-header bg-transparent border-bottom-0" style="cursor: pointer" v-bind:class="{ collapsed: collapseForm }" data-toggle="collapse" data-target="#bond-finder-form-collapse">Настройки
+<svg class="bond-finder-collapse-icon" viewBox="0 0 24 24">
+  <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
+  <path d="M0 0h24v24H0z" fill="none"></path>
+</svg>
+          </div>
+          <div class="collapse" id="bond-finder-form-collapse" v-bind:class="{ show: !collapseForm }">
+            <div class="card-body pt-2">
+<div class="form-group form-row">
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" value="1" id="form_sector1" v-model="settings.sector1">
+    <label class="form-check-label" for="form_sector1">ОФЗ</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" value="2" id="form_sector2" v-model="settings.sector2">
+    <label class="form-check-label" for="form_sector2">Муни</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" value="3" id="form_sector3" v-model="settings.sector3">
+    <label class="form-check-label" for="form_sector3">Корп</label>
+  </div>
+</div>
+<div class="form-group form-row">
+  <label>Горизонт инвестирования</label>
+  <div class="input-group">
+    <select class="form-control custom-select" v-model="settings.month">
+      <option value="01">Январь</option>
+      <option value="02">Февраль</option>
+      <option value="03">Март</option>
+      <option value="04">Апрель</option>
+      <option value="05">Май</option>
+      <option value="06">Июнь</option>
+      <option value="07">Июль</option>
+      <option value="08">Август</option>
+      <option value="09">Сентябрь</option>
+      <option value="10">Октябрь</option>
+      <option value="11">Ноябрь</option>
+      <option value="12">Декабрь</option>
+    </select>
+    <input class="form-control ml-1" type="number" v-model="settings.year">
+  </div>
+</div>
+<div class="form-group form-row">
+  <label><a href="https://www.banki.ru/blog/BAY/8858.php" target="blank">Уровень листинга</a></label>
+  <select class="form-control custom-select" v-model="settings.maxListLevel">
+    <option value="1">Только I</option>
+    <option value="2">I и II</option>
+    <option value="3">Любой</option>
+  </select>
+</div>
+<div class="form-group form-row">
+  <label>Периодичность выплат</label>
+  <select class="form-control custom-select" v-model="settings.maxPerYear">
+    <option value="2">Не чаще 2 раз в год</option>
+    <option value="4">Не чаще 4 раз в год</option>
+    <option value="-1">Любая</option>
+  </select>
+</div>
+<div class="form-group form-row">
+  <label>Амортизация</label>
+  <select class="form-control custom-select" v-model="settings.maxAmort">
+    <option value="-1">Нет</option>
+    <option value="360">Не чаще раза в год</option>
+    <option value="180">Не чаще 2 раз в год</option>
+    <option value="90">Не чаще 4 раз в год</option>
+    <option value="0">Любая</option>
+  </select>
+</div>
+<div class="form-group form-row">
+  <label>Выплата в</label>
+  <select class="form-control custom-select" v-model="settings.requiredCouponMonth">
+    <option value="0">Любом месяце</option>
+    <option value="1">Январе</option>
+    <option value="2">Феврале</option>
+    <option value="3">Марте</option>
+    <option value="4">Апреле</option>
+    <option value="5">Мае</option>
+    <option value="6">Июне</option>
+    <option value="7">Июле</option>
+    <option value="8">Августе</option>
+    <option value="9">Сентябре</option>
+    <option value="10">Октябре</option>
+    <option value="11">Ноябре</option>
+    <option value="12">Декабре</option>
+  </select>
+</div>
+<div class="form-group form-row">
+  <label>Купон</label>
+  <select class="form-control custom-select" v-model="settings.couponType">
+    <option value="0">Только постоянный</option>
+    <option value="1">Без оферты</option>
+    <option value="2">Любой</option>
+  </select>
+</div>
+<div class="form-group form-row">
+  <label>Активность торгов</label>
+  <select class="form-control custom-select" v-model="settings.minTotalTradesPerc">
+    <option value="0">Любая</option>
+    <option value="50">Средняя</option>
+    <option value="75">Выше среднего</option>
+    <option value="90">Высокая</option>
+  </select>
+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <div id="adjust-font-helper"></div>
+<table class="table table-sm table-borderless table-hover" v-if="hasFits">
+  <thead>
+    <tr>
+      <th>Бумага</th>
+      <th class="d-none d-md-table-cell text-center">Сектор</th>
+      <th class="text-center">Лист</th>
+      <th class="d-none d-sm-table-cell">Погашение</th>
+      <th class="text-right">Купон</th>
+      <th class="text-right"><span class="d-none d-lg-inline">Доходность</span><span class="d-inline d-lg-none">Доходн.</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr is="bond-row" v-for="r in reportRows" v-if="r.fits" v-bind:key="r.isin" v-bind:row="r"></tr>
+  </tbody>
+</table><span class="text-danger" v-if="!hasFits">Ничего не найдено. Покрутите настройки.</span>
+<div v-if="hasABI"><span class="bond-finder-legend-star text-success">*</span>
+  Входит в <a href="https://www.moex.com/ru/index/RUABICP" target="_blank">композитный индекс</a>.
+</div>
+<div v-if="showVarCouponNotice || showOfferNotice"><span class="bond-finder-legend-star text-danger">**</span>
+  <span v-if="!showOfferNotice">Переменный купон.</span>
+  <span v-if="showOfferNotice">Переменный купон или <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</span>
+</div>
+          </div>
+        </div>
+        <div class="card mt-2 bg-secondary text-white">
+          <div class="card-body">
+            Вы рискуете своим капиталом.
+            Доходность инвестиций не гарантируется.
+            Информация предназначена для личного использования.
+          </div>
+        </div>
+        <div class="m-2 text-muted text-right">Актуальность: {{ reportDate }}</div>
+      </div>
+    </div>
+  </div>
+</body>
+<script type="text/x-template" id="bond-row-template">
+  <tr>
+    <td class="text-nowrap"><a v-bind:href="moexUrl" target="_blank">{{ row.name }}</a><span class="text-success" v-if="row.inABI"> *</span></td>
+    <td class="d-none d-md-table-cell text-center"><span v-bind:class="sectorBadgeClass">{{ sectorName }}</span></td>
+    <td class="text-center"><span v-bind:class="listLevelBadgeClass">{{ listLevelName }}</span></td>
+    <td class="d-none d-sm-table-cell">{{ row.maturityDate }}</td>
+    <td class="text-nowrap text-right"><span class="text-danger" v-if="showCouponStar">**</span> {{ row.couponValues[0] }}</td>
+    <td class="text-right"><strong>{{ row.closeYield }}</strong></td>
+  </tr>
+</script>
+<script>/android_asset/.test(location) && document.write("<script src=cordova.js><\/script>")</script>
+<script src="jquery.slim.min.js"></script>
+<script src="vue.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="index.js"></script>

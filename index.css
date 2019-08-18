@@ -1,0 +1,110 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+table a:hover {
+    text-decoration: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+.bond-finder-collapse-icon {
+    /* https://github.com/twbs/bootstrap/blob/v4.3.1/scss/_variables.scss#L254 */
+    transition: transform 0.35s ease;
+    transform: rotate(180deg);
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-block;
+    position: absolute;
+    right: 0.75rem;
+    margin-top: 0.0625rem;
+}
+
+.card-header.collapsed .bond-finder-collapse-icon {
+    transform: rotate(0deg);
+}
+
+.bond-finder-legend-star {
+    text-align: right;
+    display: inline-block;
+    width: 1rem;
+}
+
+#bond-finder-loading {
+    position: relative;
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    top: 40%;
+    color: #6c757d;
+    animation: bond-finder-anim-loading 1.4s linear infinite;
+}
+
+#bond-finder-loading-glyph {
+    animation: bond-finder-anim-loading-glyph 1.4s ease-in-out infinite;
+    stroke-dasharray: 80px, 200px;
+    stroke-dashoffset: 0px;
+    stroke: currentColor;
+}
+
+@keyframes bond-finder-anim-loading {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bond-finder-anim-loading-glyph {
+    0% {
+        stroke-dasharray: 1px, 200px;
+        stroke-dashoffset: 0px;
+    }
+    50% {
+        stroke-dasharray: 100px, 200px;
+        stroke-dashoffset: -15px;
+    }
+    100% {
+        stroke-dasharray: 100px, 200px;
+        stroke-dashoffset: -120px;
+    }
+}
+
+#adjust-font-helper {
+    width: 18.5rem;
+    height: 0;
+}
+
+@media (min-width: 576px) {
+    #adjust-font-helper {
+        width: 29.2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    #adjust-font-helper {
+        width: 40.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    #adjust-font-helper {
+        width: 36rem;
+    }
+}
