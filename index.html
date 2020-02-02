@@ -125,7 +125,7 @@
         <div class="card">
           <div class="card-body">
             <div id="adjust-font-helper"></div>
-<table class="table table-sm table-borderless table-hover" v-if="hasFits">
+<table class="table table-sm table-borderless table-hover" v-show="hasFits">
   <thead>
     <tr>
       <th>Бумага</th>
@@ -137,15 +137,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr is="bond-row" v-for="r in reportRows" v-if="r.fits" v-bind:key="r.isin" v-bind:row="r"></tr>
+    <tr is="bond-row" v-for="r in reportRows" v-show="r.fits" v-bind:key="r.isin" v-bind:row="r"></tr>
   </tbody>
-</table><span class="text-danger" v-if="!hasFits">Ничего не найдено. Покрутите настройки.</span>
-<div v-if="hasABI"><span class="bond-finder-legend-star text-success">*</span>
+</table><span class="text-danger" v-show="!hasFits">Ничего не найдено. Покрутите настройки.</span>
+<div v-show="hasABI"><span class="bond-finder-legend-star text-success">*</span>
   Входит в <a href="https://www.moex.com/ru/index/RUABICP" target="_blank">композитный индекс</a>.
 </div>
-<div v-if="showVarCouponNotice || showOfferNotice"><span class="bond-finder-legend-star text-danger">**</span>
-  <span v-if="!showOfferNotice">Переменный купон.</span>
-  <span v-if="showOfferNotice">Переменный купон или <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</span>
+<div v-show="showVarCouponNotice || showOfferNotice"><span class="bond-finder-legend-star text-danger">**</span>
+  <span v-show="!showOfferNotice">Переменный купон.</span>
+  <span v-show="showOfferNotice">Переменный купон или <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</span>
 </div>
           </div>
         </div>
