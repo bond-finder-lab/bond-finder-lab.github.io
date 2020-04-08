@@ -7,6 +7,11 @@ body {
     overflow-y: scroll;
 }
 
+.card-body {
+    /* Prevent Chrome font boosting */
+    max-height: 12345px;
+}
+
 table a:hover {
     text-decoration: none;
 }
@@ -83,28 +88,5 @@ input::-ms-clear {
     100% {
         stroke-dasharray: 100px, 200px;
         stroke-dashoffset: -120px;
-    }
-}
-
-#adjust-font-helper {
-    width: 18.5rem;
-    height: 0;
-}
-
-@media (min-width: 576px) {
-    #adjust-font-helper {
-        width: 29.2rem;
-    }
-}
-
-@media (min-width: 768px) {
-    #adjust-font-helper {
-        width: 40.5rem;
-    }
-}
-
-@media (min-width: 992px) {
-    #adjust-font-helper {
-        width: 36rem;
     }
 }
