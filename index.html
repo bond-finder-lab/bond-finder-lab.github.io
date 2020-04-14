@@ -11,6 +11,11 @@
   <circle id="bond-finder-loading-glyph" cx="44" cy="44" r="19.8" fill="none" stroke-width="4.4"></circle>
 </svg>
   <div class="container" id="vue-root" style="display: none">
+<div class="alert alert-danger alert-dismissible mt-1 mb-n1" v-if="showAlert"><span>
+    С 2021 года изменится налогообложение облигаций!
+    <a class="alert-link" href="https://www.banki.ru/blog/BAY/10537.php" target="_blank">Читать подробнее&hellip; </a></span>
+  <button class="close" type="button" data-dismiss="alert" v-on:click="alertClose">&times;</button>
+</div>
     <div class="row no-gutters mt-2">
       <div class="col-lg-4">
         <div class="card mb-2 mr-lg-2">
