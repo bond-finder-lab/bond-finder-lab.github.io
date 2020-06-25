@@ -147,6 +147,9 @@
 <div v-show="hasABI"><span class="bond-finder-legend-star text-success">*</span>
   Входит в <a href="https://www.moex.com/ru/index/RUABICP" target="_blank">композитный индекс</a>.
 </div>
+<div v-show="hasHighRisk"><span class="bond-finder-legend-star text-orange">*</span>
+  <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">Сектор повышенного риска</a>.
+</div>
 <div v-show="showVarCouponNotice || showOfferNotice"><span class="bond-finder-legend-star text-danger">**</span>
   <span v-show="!showOfferNotice">Переменный купон.</span>
   <span v-show="showOfferNotice">Переменный купон или <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</span>
@@ -167,7 +170,7 @@
 </body>
 <script type="text/x-template" id="bond-row-template">
   <tr>
-    <td class="text-nowrap"><a v-bind:href="moexUrl" target="_blank">{{ row.name }}</a><span class="text-success" v-if="row.inABI"> *</span></td>
+    <td class="text-nowrap"><a v-bind:href="moexUrl" target="_blank">{{ row.name }}</a><span class="text-success" v-if="row.inABI"> *</span><span class="text-orange" v-if="row.isHighRisk"> *</span></td>
     <td class="d-none d-md-table-cell text-center"><span v-bind:class="sectorBadgeClass">{{ sectorName }}</span></td>
     <td class="text-center"><span v-bind:class="listLevelBadgeClass">{{ listLevelName }}</span></td>
     <td class="d-none d-sm-table-cell">{{ row.maturityDate }}</td>

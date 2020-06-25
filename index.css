@@ -12,6 +12,10 @@ body {
     max-height: 12345px;
 }
 
+.text-orange {
+    color: #fd7e14;
+}
+
 @media(max-width: 400px) {
     table {
         font-size: calc(13px + 3 / 80 * (100vw - 320px));
