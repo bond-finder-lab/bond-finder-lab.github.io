@@ -9,7 +9,7 @@ body {
 
 .card-body {
     /* Prevent Chrome font boosting */
-    max-height: 12345px;
+    max-height: 123456px;
 }
 
 .text-orange {
