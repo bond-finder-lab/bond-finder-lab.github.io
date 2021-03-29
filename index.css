@@ -17,7 +17,7 @@ body {
 }
 
 @media(max-width: 400px) {
-    table {
+    .bond-finder-main-card {
         font-size: calc(13px + 3 / 80 * (100vw - 320px));
     }
 }
@@ -56,10 +56,28 @@ input::-ms-clear {
     transform: rotate(0deg);
 }
 
+.bond-finder-ir-badge {
+    text-align: left;
+    width: 2.5em;
+}
+
+.bond-finder-ir-badge::before {
+    color: #fff;
+    font-size: 75%;
+    position: absolute;
+    width: 3.3333em;
+    margin-top: -0.3333em;
+    margin-left: -0.8em;
+    line-height: 2;
+    text-align: center;
+    content: "ПИР";
+}
+
 .bond-finder-legend-star {
     text-align: right;
     display: inline-block;
-    width: 1rem;
+    width: 1em;
+    white-space: nowrap;
 }
 
 #bond-finder-loading {

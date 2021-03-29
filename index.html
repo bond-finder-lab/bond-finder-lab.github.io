@@ -132,7 +132,7 @@
       </div>
       <div class="col-lg-8">
         <div class="card">
-          <div class="card-body">
+          <div class="card-body bond-finder-main-card">
 <table class="table table-sm table-borderless table-hover" v-show="hasFits">
   <thead>
     <tr>
@@ -147,16 +147,27 @@
   <tbody>
     <tr is="bond-row" v-for="r in reportRows" v-show="r.fits" v-bind:key="r.isin" v-bind:row="r"></tr>
   </tbody>
-</table><span class="text-danger" v-show="!hasFits">Ничего не найдено. Покрутите настройки.</span>
+</table><span class="text-danger" v-show="!hasFits &amp;&amp; !reportError">Ничего не найдено. Покрутите настройки.</span><span v-show="reportError">
+  <h5>Здесь будет список облигаций</h5>
+  <p>Пожалуйста, подключитесь к Интернету и нажмите кнопку:</p>
+  <p>
+    <button class="btn btn-lg btn-outline-primary" onclick="location.reload()">Загрузить данные</button>
+  </p></span>
 <div v-show="hasABI"><span class="bond-finder-legend-star text-success">*</span>
   Входит в <a href="https://www.moex.com/ru/index/RUABICP" target="_blank">композитный индекс</a>.
 </div>
-<div v-show="hasHighRisk"><span class="bond-finder-legend-star text-orange">*</span>
-  <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">Сектор повышенного риска</a>.
+<div v-show="hasCBHY"><span class="bond-finder-legend-star"><sup class="text-success">вд</sup></span>
+  Входит в <a href="https://www.moex.com/ru/index/RUCBHYCP" target="_blank">индекс ВДО ПИР</a>.
+</div>
+<div v-show="hasQualOnly"><span class="bond-finder-legend-star"><sup class="text-danger">кв</sup></span>
+  Бумаги для <a href="https://place.moex.com/useful/status-kvalifitsirovannogo-investora-zachem-on-nuzhen-i-kak-ego-poluchit" target="_blank">квалов</a>.
 </div>
 <div v-show="showVarCouponNotice || showOfferNotice"><span class="bond-finder-legend-star text-danger">**</span>
   <span v-show="!showOfferNotice">Переменный купон.</span>
   <span v-show="showOfferNotice">Переменный купон или <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</span>
+</div>
+<div v-show="hasHighRisk"><span class="bond-finder-legend-star"></span>
+  ПИР &ndash; <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">сектор повышенного риска</a>.
 </div>
           </div>
         </div>
@@ -167,14 +178,14 @@
             Информация предназначена для личного использования.
           </div>
         </div>
-        <div class="m-2 text-muted text-right">Актуальность: {{ reportDate }}</div>
+        <div class="m-2 text-muted text-right" v-if="reportDate">Актуальность: {{ reportDate }}</div>
       </div>
     </div>
   </div>
 </body>
 <script type="text/x-template" id="bond-row-template">
   <tr>
-    <td class="text-nowrap"><a v-bind:href="moexUrl" target="_blank">{{ row.name }}</a><span class="text-success" v-if="row.inABI"> *</span><span class="text-orange" v-if="row.isHighRisk"> *</span></td>
+    <td class="text-nowrap"><a v-bind:href="moexUrl" target="_blank">{{ row.name }}</a><span class="text-success" v-if="row.inABI"> *</span><sup class="text-success" v-if="row.inCHBY"> вд</sup><sup class="text-danger" v-if="row.isQualOnly"> кв</sup></td>
     <td class="d-none d-md-table-cell text-center"><span v-bind:class="sectorBadgeClass">{{ sectorName }}</span></td>
     <td class="text-center"><span v-bind:class="listLevelBadgeClass">{{ listLevelName }}</span></td>
     <td class="d-none d-sm-table-cell">{{ row.maturityDate }}</td>
