@@ -27,7 +27,7 @@
           </div>
           <div class="collapse" id="bond-finder-form-collapse" v-bind:class="{ show: !collapseForm }">
             <div class="card-body pt-2">
-<div class="form-group form-row">
+<div class="form-group form-row flex-nowrap">
   <div class="form-check form-check-inline">
     <input class="form-check-input" type="checkbox" value="1" id="form_sector1" v-model="settings.sector1">
     <label class="form-check-label" for="form_sector1">ОФЗ</label>
@@ -185,7 +185,7 @@
 </body>
 <script type="text/x-template" id="bond-row-template">
   <tr>
-    <td class="text-nowrap"><a v-bind:href="moexUrl" target="_blank">{{ row.name }}</a><span class="text-success" v-if="row.inABI"> *</span><sup class="text-success" v-if="row.inCHBY"> вд</sup><sup class="text-danger" v-if="row.isQualOnly"> кв</sup></td>
+    <td class="text-nowrap"><a v-bind:href="moexUrl" target="_blank">{{ row.name }}</a><span class="text-success" v-if="row.inABI"> *</span><sup class="text-success" v-if="row.inCBHY"> вд</sup><sup class="text-danger" v-if="row.isQualOnly"> кв</sup></td>
     <td class="d-none d-md-table-cell text-center"><span v-bind:class="sectorBadgeClass">{{ sectorName }}</span></td>
     <td class="text-center"><span v-bind:class="listLevelBadgeClass">{{ listLevelName }}</span></td>
     <td class="d-none d-sm-table-cell">{{ row.maturityDate }}</td>
