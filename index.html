@@ -133,7 +133,7 @@
       <div class="col-lg-8">
         <div class="card">
           <div class="card-body bond-finder-main-card">
-<table class="table table-sm table-borderless table-hover" v-show="hasFits">
+<table class="table table-sm table-borderless table-hover" v-show="totalFits">
   <thead>
     <tr>
       <th>Бумага</th>
@@ -145,9 +145,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr is="bond-row" v-for="r in reportRows" v-show="r.fits" v-bind:key="r.isin" v-bind:row="r"></tr>
+    <tr is="bond-row" v-for="r in reportRows" v-show="r.fits &amp;&amp; (showAll || r.top)" v-bind:key="r.isin" v-bind:row="r"></tr>
   </tbody>
-</table><span class="text-danger" v-show="!hasFits &amp;&amp; !reportError">Ничего не найдено. Покрутите настройки.</span><span v-show="reportError">
+</table>
+<button class="btn btn-sm btn-block btn-secondary mb-4" v-show="!reportError &amp;&amp; !showAll" v-on:click="showAll = true">Показать все ({{ totalFits }})</button><span class="text-danger" v-show="!totalFits &amp;&amp; !reportError">Ничего не найдено. Покрутите настройки.</span><span v-show="reportError">
   <h5>Здесь будет список облигаций</h5>
   <p>Пожалуйста, подключитесь к Интернету и нажмите кнопку:</p>
   <p>
