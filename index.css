@@ -50,6 +50,7 @@ input::-ms-clear {
     position: absolute;
     right: 0.75rem;
     margin-top: 0.0625rem;
+    fill: #343a40;
 }
 
 .card-header.collapsed .bond-finder-collapse-icon {

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="bootstrap.min.css">
 <link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="night.css">
 <link rel="icon" href="favicon.png" sizes="32x32">
 <body class="bg-dark">
 <svg id="bond-finder-loading" viewBox="22 22 44 44">
@@ -124,6 +125,14 @@
     <option value="50">Средняя</option>
     <option value="75">Выше среднего</option>
     <option value="90">Высокая</option>
+  </select>
+</div>
+<div class="form-group form-row">
+  <label>Внешний вид</label>
+  <select class="form-control custom-select" v-model="nightMode">
+    <option value="-1">Авто</option>
+    <option value="0">День</option>
+    <option value="1">Ночь</option>
   </select>
 </div>
             </div>

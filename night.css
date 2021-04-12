@@ -1,0 +1,128 @@
+.night body {
+    color: #cdd4d9;
+}
+
+.night a {
+    color: #69b8ff;
+}
+
+.night table {
+    color: #cdd4d9;
+}
+
+.night .table-hover tbody tr:hover {
+    color: #cdd4d9;
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+.night .text-white {
+    color: #cdd4d9 !important;
+}
+
+.night .text-success {
+    color: #89d685 !important;
+}
+
+.night .text-danger {
+    color: #ff7e81 !important;
+}
+
+.night .bg-secondary {
+    background-color: #30373d !important;
+}
+
+.night .badge-success {
+    color: #394442;
+    background-color: #89d685;
+}
+
+.night .badge-warning {
+    color: #424240;
+    background-color: #ecb156;
+}
+
+.night .badge-danger {
+    color: #483f45;
+    background-color: #ff7e81;
+}
+
+.night .badge-dark {
+    color: #30373d;
+    background-color: #919ba2;
+}
+
+.night .alert-danger {
+    color: #ff7e81;
+    background-color: #483f45;
+    border-color: #8e4e53;
+}
+
+.night .alert-danger .alert-link {
+    color: #ff7e81;
+}
+
+.night .close {
+    color: #ff7e81;
+    text-shadow: none;
+}
+
+.night .card {
+    background-color: #343a40;
+    border-color: #5a6168;
+}
+
+.night .form-control,
+.night .custom-select {
+    color: #cdd4d9;
+    background-color: #30373d;
+    border-color: #5a6168;
+}
+
+.night .form-control:focus,
+.night .custom-select:focus {
+    box-shadow: none;
+}
+
+.night .form-control:focus-visible,
+.night .custom-select:focus-visible {
+    text-shadow: none;
+}
+
+.night .custom-select {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'><path fill='%23919ba2' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+}
+
+.night .form-check-input {
+    filter: brightness(85%);
+}
+
+.night .btn-outline-primary {
+    color: #69b8ff;
+    border-color: #69b8ff;
+}
+
+.night .btn-outline-primary:hover {
+    color: #eff4f7;
+    background-color: #69b8ff;
+}
+
+.night .btn-outline-primary:not(:disabled):active {
+    color: #eff4f7;
+    background-color: #69b8ff;
+    border-color: #69b8ff;
+}
+
+.night .btn-outline-primary:focus,
+.night .btn-outline-primary:not(:disabled):active:focus,
+.night .btn-secondary:focus,
+.night .btn-secondary:not(:disabled):active:focus {
+    box-shadow: none;
+}
+
+.night .bond-finder-collapse-icon {
+    fill: #919ba2;
+}
+
+.night .bond-finder-ir-badge::before {
+    color: #30373d;
+}
