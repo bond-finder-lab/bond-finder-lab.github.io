@@ -8,9 +8,12 @@
 <link rel="stylesheet" href="night.css">
 <link rel="icon" href="favicon.png" sizes="32x32">
 <body class="bg-dark">
+  <div id="bond-finder-overlay-top"></div>
+  <div id="bond-finder-overlay-bottom"></div>
 <svg id="bond-finder-loading" viewBox="22 22 44 44">
   <circle id="bond-finder-loading-glyph" cx="44" cy="44" r="19.8" fill="none" stroke-width="4.4"></circle>
 </svg>
+  <div id="bond-finder-inset-top"></div>
   <div class="container" id="vue-root" style="display: none">
 <div class="alert alert-danger alert-dismissible mt-1 mb-n1" v-if="showAlert"><span>
     С 2021 года изменилось налогообложение облигаций!
@@ -157,7 +160,7 @@
     <tr is="bond-row" v-for="r in reportRows" v-show="r.fits &amp;&amp; (showAll || r.top)" v-bind:key="r.isin" v-bind:row="r"></tr>
   </tbody>
 </table>
-<button class="btn btn-sm btn-block btn-secondary mb-4" v-show="!reportError &amp;&amp; !showAll" v-on:click="showAll = true">Показать все ({{ totalFits }})</button><span class="text-danger" v-show="!totalFits &amp;&amp; !reportError">Ничего не найдено. Покрутите настройки.</span><span v-show="reportError">
+<button class="btn btn-block btn-secondary mb-4" v-show="!reportError &amp;&amp; !showAll" v-on:click="showAll = true">Показать все ({{ totalFits }})</button><span class="text-danger" v-show="!totalFits &amp;&amp; !reportError">Ничего не найдено. Покрутите настройки.</span><span v-show="reportError">
   <h5>Здесь будет список облигаций</h5>
   <p>Пожалуйста, подключитесь к Интернету и нажмите кнопку:</p>
   <p>
@@ -192,6 +195,7 @@
       </div>
     </div>
   </div>
+  <div id="bond-finder-inset-bottom"></div>
 </body>
 <script type="text/x-template" id="bond-row-template">
   <tr>

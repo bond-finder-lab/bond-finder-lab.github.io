@@ -7,6 +7,17 @@ body {
     overflow-y: scroll;
 }
 
+.badge,
+.custom-select,
+.form-control {
+    transition: none;
+}
+
+.form-control:focus,
+.custom-select:focus {
+    box-shadow: none;
+}
+
 .card-body {
     /* Prevent Chrome font boosting */
     max-height: 123456px;
@@ -118,4 +129,26 @@ input::-ms-clear {
         stroke-dasharray: 100px, 200px;
         stroke-dashoffset: -120px;
     }
+}
+
+#bond-finder-inset-top,
+#bond-finder-inset-bottom {
+    height: 0;
+}
+
+#bond-finder-overlay-top,
+#bond-finder-overlay-bottom {
+    position :fixed;
+    width: 100%;
+    height: 0;
+    z-index: 12345;
+    background-color: #343A40;
+}
+
+#bond-finder-overlay-top {
+    top: 0;
+}
+
+#bond-finder-overlay-bottom {
+    bottom: 0;
 }
