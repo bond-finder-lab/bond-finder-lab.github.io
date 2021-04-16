@@ -143,6 +143,7 @@ input::-ms-clear {
     height: 0;
     z-index: 12345;
     background-color: #343A40;
+    transition: background-color 0.3s ease-in-out;
 }
 
 #bond-finder-overlay-top {
