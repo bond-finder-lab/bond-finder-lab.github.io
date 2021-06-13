@@ -37,6 +37,10 @@ table a:hover {
     text-decoration: none;
 }
 
+table tr.bond-finder-separator {
+    border-top: solid 1px #ced4da;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
