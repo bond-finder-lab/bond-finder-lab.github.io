@@ -26,7 +26,13 @@
           </div>
           <div class="collapse" id="bond-finder-form-collapse" v-bind:class="{ show: !collapseForm }">
             <div class="card-body pt-2">
-<div class="form-group form-row flex-nowrap">
+<div class="form-group form-row">
+  <select class="form-control custom-select" v-model="settings.rub">
+    <option v-bind:value="true">В рублях</option>
+    <option v-bind:value="false">В валюте / Замещающие</option>
+  </select>
+</div>
+<div class="form-group form-row flex-nowrap" v-show="settings.rub">
   <div class="form-check form-check-inline">
     <input class="form-check-input" type="checkbox" value="1" id="form_sector1" v-model="settings.sector1">
     <label class="form-check-label" for="form_sector1">ОФЗ</label>
@@ -81,7 +87,7 @@
     <input class="form-control ml-1" type="number" v-model="settings.year">
   </div>
 </div>
-<div class="form-group form-row">
+<div class="form-group form-row" v-show="settings.rub">
   <label><a href="https://www.banki.ru/blog/BAY/8858.php" target="blank">Уровень листинга</a></label>
   <select class="form-control custom-select" v-model="settings.maxListLevel">
     <option value="1">Только I</option>
@@ -89,7 +95,7 @@
     <option value="3">Любой</option>
   </select>
 </div>
-<div class="form-group form-row">
+<div class="form-group form-row" v-show="settings.rub">
   <label>Периодичность выплат</label>
   <select class="form-control custom-select" v-model="settings.maxPerYear">
     <option value="2">Не чаще 2 раз в год</option>
@@ -97,7 +103,7 @@
     <option value="-1">Любая</option>
   </select>
 </div>
-<div class="form-group form-row">
+<div class="form-group form-row" v-show="settings.rub">
   <label>Амортизация</label>
   <select class="form-control custom-select" v-model="settings.maxAmort">
     <option value="-1">Нет</option>
@@ -133,7 +139,7 @@
     <option value="2">Любой</option>
   </select>
 </div>
-<div class="form-group form-row">
+<div class="form-group form-row" v-show="settings.rub">
   <label>Активность торгов</label>
   <select class="form-control custom-select" v-model="settings.minTotalTradesPerc">
     <option value="0">Любая</option>
@@ -194,6 +200,9 @@
 <div v-show="hasHighRisk"><span class="bond-finder-legend-star"></span>
   ПИР &ndash; <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">сектор повышенного риска</a>.
 </div>
+<div class="mt-3" v-show="!settings.rub"><span class="bond-finder-legend-star"></span>
+  Что такое <a href="https://www.banki.ru/news/daytheme/?id=10975268" target="_blank">замещающие облигации</a>?
+</div>
           </div>
         </div>
         <div class="card mt-2 bg-secondary text-white">
@@ -215,7 +224,7 @@
     <td class="d-none d-md-table-cell text-center"><span v-bind:class="sectorBadgeClass">{{ sectorName }}</span></td>
     <td class="text-center"><span v-bind:class="listLevelBadgeClass">{{ listLevelName }}</span></td>
     <td class="d-none d-sm-table-cell">{{ row.maturityDate }}</td>
-    <td class="text-nowrap text-right"><span class="text-danger" v-if="showCouponStar">**</span> {{ row.couponValues[0] }}</td>
+    <td class="text-nowrap text-right"><span class="text-danger" v-if="showCouponStar">**</span> {{ row.couponValues.length ? row.couponValues[0] : "&ndash;" }}</td>
     <td class="text-right"><strong v-if="row.closeYield">{{ row.closeYield }}</strong><a v-if="!row.closeYield &amp;&amp; row.infoUrl" target="_blank" v-bind:href="row.infoUrl">Инфо</a></td>
   </tr>
 </script>
