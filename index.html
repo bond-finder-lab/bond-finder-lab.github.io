@@ -96,6 +96,17 @@
   </select>
 </div>
 <div class="form-group form-row" v-show="settings.rub">
+  <label>Минимальный рейтинг <span class="badge badge-pill badge-warning">&beta;eta</span></label>
+  <select class="form-control custom-select" v-model="settings.minRating">
+    <option value="6">AAA</option>
+    <option value="5">AA</option>
+    <option value="4">A</option>
+    <option value="3">BBB</option>
+    <option value="2">BB</option>
+    <option value="0">Любой</option>
+  </select>
+</div>
+<div class="form-group form-row" v-show="settings.rub">
   <label>Периодичность выплат</label>
   <select class="form-control custom-select" v-model="settings.maxPerYear">
     <option value="2">Не чаще 2 раз в год</option>
@@ -191,7 +202,7 @@
   Входит в <a href="https://www.moex.com/ru/index/RUCBHYCP" target="_blank">индекс ВДО ПИР</a>.
 </div>
 <div v-show="hasQualOnly"><span class="bond-finder-legend-star"><sup class="text-danger">кв</sup></span>
-  Бумаги для <a href="https://place.moex.com/useful/status-kvalifitsirovannogo-investora-zachem-on-nuzhen-i-kak-ego-poluchit" target="_blank">квалов</a>.
+  Бумаги для <a href="https://www.banki.ru/news/daytheme/?id=10970880" target="_blank">квалов</a>.
 </div>
 <div v-show="showVarCouponNotice || showOfferNotice"><span class="bond-finder-legend-star text-danger">**</span>
   <span v-show="!showOfferNotice">Переменный купон.</span>
