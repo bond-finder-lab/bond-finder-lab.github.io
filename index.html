@@ -178,8 +178,8 @@
   <thead>
     <tr>
       <th>Бумага</th>
-      <th class="d-none d-md-table-cell text-center">Сектор</th>
       <th class="text-center">Лист</th>
+      <th class="d-none d-md-table-cell">Рейтинг</th>
       <th class="d-none d-sm-table-cell">Погашение</th>
       <th class="text-right">Купон</th>
       <th class="text-right"><span class="d-none d-lg-inline">Доходность</span><span class="d-inline d-lg-none">Доходн.</span></th>
@@ -233,8 +233,8 @@
 <script type="text/x-template" id="bond-row-template">
   <tr v-bind:class="rowClass">
     <td class="text-nowrap"><a v-bind:href="moexUrl" target="_blank">{{ row.name }}</a><span class="text-success" v-if="row.inABI"> *</span><sup class="text-success" v-if="row.inCBHY"> вд</sup><sup class="text-danger" v-if="row.isQualOnly"> кв</sup></td>
-    <td class="d-none d-md-table-cell text-center"><span v-bind:class="sectorBadgeClass">{{ sectorName }}</span></td>
     <td class="text-center"><span v-bind:class="listLevelBadgeClass">{{ listLevelName }}</span></td>
+    <td class="d-none d-md-table-cell">{{ ratingText }}</td>
     <td class="d-none d-sm-table-cell">{{ row.maturityDate }}</td>
     <td class="text-nowrap text-right"><span class="text-danger" v-if="showCouponStar">**</span> {{ row.couponValues.length ? row.couponValues[0] : "&ndash;" }}</td>
     <td class="text-right"><strong v-if="row.closeYield">{{ row.closeYield }}</strong><a v-if="!row.closeYield &amp;&amp; row.infoUrl" target="_blank" v-bind:href="row.infoUrl">Инфо</a></td>
