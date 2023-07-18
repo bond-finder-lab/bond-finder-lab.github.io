@@ -176,13 +176,14 @@
           <div class="card-body bond-finder-main-card">
 <table class="table table-sm table-borderless table-hover" v-show="totalFits">
   <thead>
-    <tr>
+    <tr class="small" style="opacity: 0.6">
       <th>Бумага</th>
       <th class="text-center">Лист</th>
-      <th class="d-none d-md-table-cell">Рейтинг</th>
+      <th class="d-none d-md-table-cell"><span class="d-none d-xl-inline">Рейтинг</span><span class="d-inline d-xl-none">Рейт.</span></th>
       <th class="d-none d-sm-table-cell">Погашение</th>
+      <th class="d-none d-md-table-cell text-right">Цена</th>
       <th class="text-right">Купон</th>
-      <th class="text-right"><span class="d-none d-lg-inline">Доходность</span><span class="d-inline d-lg-none">Доходн.</span></th>
+      <th class="text-right"><span class="d-none d-xl-inline">Доходность</span><span class="d-inline d-xl-none">Доходн.</span></th>
     </tr>
   </thead>
   <tbody>
@@ -236,6 +237,7 @@
     <td class="text-center"><span v-bind:class="listLevelBadgeClass">{{ listLevelName }}</span></td>
     <td class="d-none d-md-table-cell">{{ ratingText }}</td>
     <td class="d-none d-sm-table-cell">{{ row.maturityDate }}</td>
+    <td class="d-none d-md-table-cell text-right">{{ row.waprice }}</td>
     <td class="text-nowrap text-right"><span class="text-danger" v-if="showCouponStar">**</span> {{ row.couponValues.length ? row.couponValues[0] : "&ndash;" }}</td>
     <td class="text-right"><strong v-if="row.closeYield">{{ row.closeYield }}</strong><a v-if="!row.closeYield &amp;&amp; row.infoUrl" target="_blank" v-bind:href="row.infoUrl">Инфо</a></td>
   </tr>
