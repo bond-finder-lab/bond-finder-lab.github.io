@@ -2,7 +2,7 @@
 <title>Какие облигации покупать на ИИС?</title>
 <meta name="theme-color" content="#343a40">
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="bootstrap.min.css">
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="night.css">
@@ -95,7 +95,7 @@
     <option value="3">Любой</option>
   </select>
 </div>
-<div class="form-group form-row" v-show="settings.rub">
+<div class="form-group form-row">
   <label>Минимальный рейтинг <span class="badge badge-pill badge-warning">&beta;eta</span></label>
   <div class="input-group">
     <select class="form-control custom-select" style="flex-grow: 4" v-model="settings.minRating">
@@ -113,15 +113,16 @@
     </select>
   </div>
 </div>
-<div class="form-group form-row" v-show="settings.rub">
+<div class="form-group form-row">
   <label>Периодичность выплат</label>
   <select class="form-control custom-select" v-model="settings.maxPerYear">
     <option value="2">Не чаще 2 раз в год</option>
     <option value="4">Не чаще 4 раз в год</option>
+    <option value="-12">Ежемесячно</option>
     <option value="-1">Любая</option>
   </select>
 </div>
-<div class="form-group form-row" v-show="settings.rub">
+<div class="form-group form-row">
   <label>Амортизация</label>
   <select class="form-control custom-select" v-model="settings.maxAmort">
     <option value="-1">Нет</option>
@@ -131,7 +132,7 @@
     <option value="0">Любая</option>
   </select>
 </div>
-<div class="form-group form-row">
+<div class="form-group form-row" v-show="settings.maxPerYear != -12">
   <label>Выплата в</label>
   <select class="form-control custom-select" v-model="settings.requiredCouponMonth">
     <option value="0">Любом месяце</option>
@@ -156,6 +157,10 @@
     <option value="1">Без оферты</option>
     <option value="2">Любой</option>
   </select>
+</div>
+<div class="form-group form-row">
+  <label><a href="https://ru.wikipedia.org/wiki/Текущая_доходность" target="_blank">Купон к цене</a> не ниже</label>
+  <input class="form-control" v-model="settings.minCurrentYield" v-on:keypress="numberInputKeyPress($event)" type="number" placeholder="в процентах" lang="en-US" min="0" max="100" step="0.1">
 </div>
 <div class="form-group form-row">
   <label>Активность торгов</label>
@@ -220,11 +225,11 @@
 <div v-show="hasHighRisk"><span class="bond-finder-legend-star"></span>
   ПИР &ndash; <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">сектор повышенного риска</a>.
 </div>
-<div class="mt-3">
+<div class="mt-3" v-show="totalFits">
   <div><span class="bond-finder-legend-star"></span>
-    Как считается <a href="https://www.banki.ru/news/daytheme/?id=10982360" target="_blank">доходность</a>?
+    Как считается <a href="https://ru.wikipedia.org/wiki/Доходность_к_погашению" target="_blank">доходность</a>?
   </div>
-  <div v-show="totalFits &amp;&amp; !settings.rub"><span class="bond-finder-legend-star"></span>
+  <div v-show="!settings.rub"><span class="bond-finder-legend-star"></span>
     Что такое <a href="https://www.banki.ru/news/daytheme/?id=10975268" target="_blank">замещающие облигации</a>?
   </div>
 </div>
