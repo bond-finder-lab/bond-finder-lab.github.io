@@ -18,6 +18,10 @@ body {
     box-shadow: none;
 }
 
+.form-row .form-check-inline {
+    min-width: 3.5rem;
+}
+
 .card-body {
     /* Prevent Chrome font boosting */
     max-height: 123456px;
