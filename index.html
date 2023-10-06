@@ -10,8 +10,8 @@
 <body class="bg-dark">
   <div id="bond-finder-overlay-top"></div>
   <div id="bond-finder-overlay-bottom"></div>
-<svg id="bond-finder-loading" viewBox="22 22 44 44">
-  <circle id="bond-finder-loading-glyph" cx="44" cy="44" r="19.8" fill="none" stroke-width="4.4"></circle>
+<svg id="bond-finder-loading" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#6c757d" stroke-width="10" stroke-dasharray="30.3 10.1"></circle>
 </svg>
   <div id="bond-finder-inset-top"></div>
   <div class="container" id="vue-root" style="display: none">
@@ -167,15 +167,15 @@
 </div>
 <div class="form-group form-row">
   <label><a href="https://ru.wikipedia.org/wiki/Текущая_доходность" target="_blank">Купон к цене</a> не ниже</label>
-  <input class="form-control" v-model="settings.minCurrentYield" v-on:keypress="numberInputKeyPress($event)" type="number" placeholder="в процентах" lang="en-US" min="0" max="100" step="0.1">
+  <input class="form-control" v-model="minCurrentYieldThunk" type="number" placeholder="в процентах" lang="en-US" min="0" max="100" step="0.1">
 </div>
 <div class="form-group form-row">
   <label>Активность торгов</label>
   <select class="form-control custom-select" v-model="settings.minTotalTradesPerc">
-    <option value="0">Любая</option>
-    <option value="50">Средняя</option>
-    <option value="75">Выше среднего</option>
     <option value="90">Высокая</option>
+    <option value="75">Выше среднего</option>
+    <option value="50">Средняя</option>
+    <option value="0">Любая</option>
   </select>
 </div>
 <div class="form-group form-row">
