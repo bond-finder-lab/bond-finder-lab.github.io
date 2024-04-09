@@ -162,7 +162,8 @@
   <select class="form-control custom-select" v-model="settings.couponType">
     <option value="0">Только постоянный</option>
     <option value="1">Без неизвестных</option>
-    <option value="2">Любой</option>
+    <option value="2">Без оферты</option>
+    <option value="3">Любой</option>
   </select>
 </div>
 <div class="form-group form-row">
@@ -225,9 +226,10 @@
 <div v-show="hasQualOnly"><span class="bond-finder-legend-star"><sup class="text-danger">кв</sup></span>
   Бумаги для <a href="https://www.banki.ru/news/daytheme/?id=10970880" target="_blank">квалов</a>.
 </div>
-<div v-show="showVarCouponNotice || showUnknownCouponNotice"><span class="bond-finder-legend-star text-danger">**</span>
-  <span v-show="!showUnknownCouponNotice">Переменный купон.</span>
-  <span v-show="showUnknownCouponNotice">Переменный, <a href="https://boomin.ru/publications/article/chto-takoe-obligatsii-s-plavayushchim-kuponom-i-kogda-oni-vygodny/" target="_blank">флоатер</a> или <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</span>
+<div v-show="maxCouponType &gt; 0"><span class="bond-finder-legend-star text-danger">**</span>
+  <span v-show="maxCouponType == 1">Переменный купон (<a href="https://bcs-express.ru/novosti-i-analitika/lestnichnyi-kupon-stoit-li-pokupat-takie-obligatsii" target="_blank">лесенка</a>).</span>
+  <span v-show="maxCouponType == 2">Переменный или <a href="https://boomin.ru/publications/article/chto-takoe-obligatsii-s-plavayushchim-kuponom-i-kogda-oni-vygodny/" target="_blank">флоатер</a>.</span>
+  <span v-show="maxCouponType == 3">Переменный, <a href="https://boomin.ru/publications/article/chto-takoe-obligatsii-s-plavayushchim-kuponom-i-kogda-oni-vygodny/" target="_blank">флоатер</a> или <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</span>
 </div>
 <div v-show="hasHighRisk"><span class="bond-finder-legend-star"></span>
   ПИР &ndash; <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">сектор повышенного риска</a>.
