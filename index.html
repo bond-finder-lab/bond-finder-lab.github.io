@@ -196,7 +196,7 @@
           <div class="card-body bond-finder-main-card">
 <table class="table table-sm table-borderless table-hover" v-show="totalFits">
   <thead>
-    <tr class="small" style="opacity: 0.6">
+    <tr class="small text-alpha-60">
       <th>Бумага</th>
       <th class="text-center">Лист</th>
       <th class="d-none d-md-table-cell"><span class="d-none d-xl-inline">Рейтинг</span><span class="d-inline d-xl-none">Рейт.</span></th>
@@ -226,10 +226,13 @@
 <div v-show="hasQualOnly"><span class="bond-finder-legend-star"><sup class="text-danger">кв</sup></span>
   Бумаги для <a href="https://www.banki.ru/news/daytheme/?id=10970880" target="_blank">квалов</a>.
 </div>
-<div v-show="maxCouponType &gt; 0"><span class="bond-finder-legend-star text-danger">**</span>
-  <span v-show="maxCouponType == 1">Переменный купон (<a href="https://bcs-express.ru/novosti-i-analitika/lestnichnyi-kupon-stoit-li-pokupat-takie-obligatsii" target="_blank">лесенка</a>).</span>
-  <span v-show="maxCouponType == 2">Переменный или <a href="https://boomin.ru/publications/article/chto-takoe-obligatsii-s-plavayushchim-kuponom-i-kogda-oni-vygodny/" target="_blank">флоатер</a>.</span>
-  <span v-show="maxCouponType == 3">Переменный, <a href="https://boomin.ru/publications/article/chto-takoe-obligatsii-s-plavayushchim-kuponom-i-kogda-oni-vygodny/" target="_blank">флоатер</a> или <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</span>
+<div v-show="maxFittedCouponType &gt; 0"><span class="bond-finder-legend-star text-danger">**</span>
+  <span v-show="maxFittedCouponType == 1">Переменный купон (<a href="https://bcs-express.ru/novosti-i-analitika/lestnichnyi-kupon-stoit-li-pokupat-takie-obligatsii" target="_blank">лесенка</a>).</span>
+  <span v-show="maxFittedCouponType == 2">Переменный или <a href="https://boomin.ru/publications/article/chto-takoe-obligatsii-s-plavayushchim-kuponom-i-kogda-oni-vygodny/" target="_blank">флоатер</a>.</span>
+  <span v-show="maxFittedCouponType == 3">Переменный, <a href="https://boomin.ru/publications/article/chto-takoe-obligatsii-s-plavayushchim-kuponom-i-kogda-oni-vygodny/" target="_blank">флоатер</a> или <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</span>
+</div>
+<div class="d-none d-sm-block" v-show="hasAmort"><span class="bond-finder-legend-star"><sup class="text-alpha-60">A</sup></span>
+  Будет амортизация.
 </div>
 <div v-show="hasHighRisk"><span class="bond-finder-legend-star"></span>
   ПИР &ndash; <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">сектор повышенного риска</a>.
@@ -262,7 +265,10 @@
     <td class="text-nowrap"><a v-bind:href="moexUrl" target="_blank">{{ row.name }}</a><span class="text-success" v-if="row.inABI"> *</span><sup class="text-success" v-if="row.inCBHY"> вд</sup><sup class="text-danger" v-if="row.isQualOnly"> кв</sup></td>
     <td class="text-center"><span v-bind:class="listLevelBadgeClass">{{ listLevelName }}</span></td>
     <td class="d-none d-md-table-cell">{{ ratingText }}</td>
-    <td class="d-none d-sm-table-cell">{{ row.maturityDate }}</td>
+    <td class="d-none d-sm-table-cell">
+      {{ row.maturityDate }}
+      <sup class="text-alpha-60" v-if="row.minDaysBetweenAmort">A</sup>
+    </td>
     <td class="d-none d-md-table-cell text-right">{{ row.waprice }}</td>
     <td class="text-nowrap text-right"><span class="text-danger" v-if="showCouponStar">**</span> {{ row.couponValues.length ? row.couponValues[0] : "&ndash;" }}</td>
     <td class="text-right"><strong v-if="row.closeYield">{{ row.closeYield }}</strong><a v-if="!row.closeYield &amp;&amp; row.infoUrl" target="_blank" v-bind:href="row.infoUrl">Инфо</a></td>

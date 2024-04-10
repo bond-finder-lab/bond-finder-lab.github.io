@@ -5,6 +5,7 @@ html, body {
 body {
     overflow-x: hidden;
     overflow-y: scroll;
+    font-variant-numeric: tabular-nums;
 }
 
 .badge,
@@ -29,6 +30,10 @@ body {
 
 .text-orange {
     color: #fd7e14;
+}
+
+.text-alpha-60 {
+    opacity: 0.6;
 }
 
 .bond-finder-main-card .btn {
