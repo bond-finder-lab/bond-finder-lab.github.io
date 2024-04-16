@@ -94,7 +94,7 @@
   </div>
 </div>
 <div class="form-group form-row" v-show="settings.rub">
-  <label><a href="https://www.banki.ru/blog/BAY/8858.php" target="blank">Уровень листинга</a></label>
+  <label><a href="https://www.banki.ru/dialog/articles/1153/" target="blank">Уровень листинга</a></label>
   <select class="form-control custom-select" v-model="settings.maxListLevel">
     <option value="1">Только I</option>
     <option value="2">I и II</option>
@@ -226,14 +226,14 @@
 <div v-show="hasQualOnly"><span class="bond-finder-legend-star"><sup class="text-danger">кв</sup></span>
   Бумаги для <a href="https://www.banki.ru/news/daytheme/?id=10970880" target="_blank">квалов</a>.
 </div>
-<div v-show="maxFittedCouponType &gt; 0"><span class="bond-finder-legend-star text-danger">**</span>
-  <span v-show="maxFittedCouponType == 1">Переменный купон (<a href="https://bcs-express.ru/novosti-i-analitika/lestnichnyi-kupon-stoit-li-pokupat-takie-obligatsii" target="_blank">лесенка</a>).</span>
-  <span v-show="maxFittedCouponType == 2">Переменный или <a href="https://boomin.ru/publications/article/chto-takoe-obligatsii-s-plavayushchim-kuponom-i-kogda-oni-vygodny/" target="_blank">флоатер</a>.</span>
-  <span v-show="maxFittedCouponType == 3">Переменный, <a href="https://boomin.ru/publications/article/chto-takoe-obligatsii-s-plavayushchim-kuponom-i-kogda-oni-vygodny/" target="_blank">флоатер</a> или <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</span>
+<div v-show="hasFutureAmort">
+  <div class="d-none d-sm-block"><span class="bond-finder-legend-star"><sup class="text-alpha-60">A</sup></span>
+    Будет амортизация.
+  </div>
 </div>
-<div class="d-none d-sm-block" v-show="hasAmort"><span class="bond-finder-legend-star"><sup class="text-alpha-60">A</sup></span>
-  Будет амортизация.
-</div>
+<div v-show="fittedCouponTypes[1]"><span class="bond-finder-legend-star"><sup class="text-danger">↓</sup></span> Купон-<a href="https://bcs-express.ru/novosti-i-analitika/lestnichnyi-kupon-stoit-li-pokupat-takie-obligatsii" target="_blank">лесенка</a>.</div>
+<div v-show="fittedCouponTypes[2]"><span class="bond-finder-legend-star text-danger">**</span> Есть неизвестные купоны.</div>
+<div v-show="fittedCouponTypes[3]"><span class="bond-finder-legend-star"><sup class="text-danger">оф</sup></span> Предусмотрена <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</div>
 <div v-show="hasHighRisk"><span class="bond-finder-legend-star"></span>
   ПИР &ndash; <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">сектор повышенного риска</a>.
 </div>
@@ -267,10 +267,13 @@
     <td class="d-none d-md-table-cell">{{ ratingText }}</td>
     <td class="d-none d-sm-table-cell">
       {{ row.maturityDate }}
-      <sup class="text-alpha-60" v-if="row.minDaysBetweenAmort">A</sup>
+      <sup class="text-alpha-60" v-if="row.hasFutureAmort">A</sup>
     </td>
     <td class="d-none d-md-table-cell text-right">{{ row.waprice }}</td>
-    <td class="text-nowrap text-right"><span class="text-danger" v-if="showCouponStar">**</span> {{ row.couponValues.length ? row.couponValues[0] : "&ndash;" }}</td>
+    <td class="text-nowrap text-right"><span class="text-danger" v-if="showCouponStar">**</span>
+      <sup class="text-danger" v-if="showCouponHint">{{ couponHintText }} </sup>
+      {{ row.couponValues.length ? row.couponValues[0] : "&ndash;" }}
+    </td>
     <td class="text-right"><strong v-if="row.closeYield">{{ row.closeYield }}</strong><a v-if="!row.closeYield &amp;&amp; row.infoUrl" target="_blank" v-bind:href="row.infoUrl">Инфо</a></td>
   </tr>
 </script>
