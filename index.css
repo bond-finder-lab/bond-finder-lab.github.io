@@ -42,7 +42,7 @@ body {
 
 @media(max-width: 400px) {
     .bond-finder-main-card {
-        font-size: calc(13px + 3 / 80 * (100vw - 320px));
+        font-size: calc(12px + 4 / 80 * (100vw - 320px));
     }
 }
 
