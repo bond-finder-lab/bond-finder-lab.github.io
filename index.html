@@ -94,7 +94,7 @@
   </div>
 </div>
 <div class="form-group form-row" v-show="settings.rub">
-  <label><a href="https://www.banki.ru/dialog/articles/1153/" target="blank">Уровень листинга</a></label>
+  <label><a href="https://www.banki.ru/dialog/articles/1153/" target="_blank">Уровень листинга</a></label>
   <select class="form-control custom-select" v-model="settings.maxListLevel">
     <option value="1">Только I</option>
     <option value="2">I и II</option>
@@ -102,7 +102,7 @@
   </select>
 </div>
 <div class="form-group form-row">
-  <label>Минимальный рейтинг</label>
+  <label>Минимальный <a href="https://www.banki.ru/news/daytheme/?id=11001184" target="_blank">рейтинг</a></label>
   <div class="input-group">
     <select class="form-control custom-select" style="flex-grow: 4" v-model="settings.minRating">
       <option value="6">AAA</option>
@@ -234,8 +234,10 @@
 <div v-show="fittedCouponTypes[1]"><span class="bond-finder-legend-star"><sup class="text-danger">↓</sup></span> Купон-<a href="https://bcs-express.ru/novosti-i-analitika/lestnichnyi-kupon-stoit-li-pokupat-takie-obligatsii" target="_blank">лесенка</a>.</div>
 <div v-show="fittedCouponTypes[2]"><span class="bond-finder-legend-star text-danger">**</span> Есть неизвестные купоны.</div>
 <div v-show="fittedCouponTypes[3]"><span class="bond-finder-legend-star"><sup class="text-danger">оф</sup></span> Предусмотрена <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</div>
-<div v-show="hasHighRisk"><span class="bond-finder-legend-star"></span>
-  ПИР &ndash; <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">сектор повышенного риска</a>.
+<div v-show="hasHighRisk">
+  <div class="d-none d-md-block"><span class="bond-finder-legend-star"></span>
+    ПИР &ndash; <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">сектор повышенного риска</a>.
+  </div>
 </div>
 <div class="mt-3" v-show="totalFits">
   <div><span class="bond-finder-legend-star"></span>
@@ -264,7 +266,7 @@
   <tr v-bind:class="rowClass">
     <td class="text-nowrap"><a v-bind:href="moexUrl" target="_blank">{{ row.name }}</a><span class="text-success" v-if="row.inABI"> *</span><sup class="text-success" v-if="row.inCBHY"> вд</sup><sup class="text-danger" v-if="row.isQualOnly"> кв</sup></td>
     <td class="d-none d-md-table-cell text-center"><span v-bind:class="listLevelBadgeClass">{{ listLevelName }}</span></td>
-    <td>{{ ratingText || "&ndash;" }}</td>
+    <td>{{ ratingText }}</td>
     <td class="d-none d-sm-table-cell">
       {{ row.maturityDate }}
       <sup class="text-alpha-60" v-if="row.hasFutureAmort">A</sup>
@@ -272,7 +274,7 @@
     <td class="d-none d-md-table-cell text-right">{{ row.waprice }}</td>
     <td class="text-nowrap text-right"><span class="text-danger" v-if="showCouponStar">**</span>
       <sup class="text-danger" v-if="showCouponHint">{{ couponHintText }} </sup>
-      {{ row.couponValues.length ? row.couponValues[0] : "&ndash;" }}
+      {{ couponValueText }}
     </td>
     <td class="text-right"><strong v-if="row.closeYield">{{ row.closeYield }}</strong><a v-if="!row.closeYield &amp;&amp; row.infoUrl" target="_blank" v-bind:href="row.infoUrl">Инфо</a></td>
   </tr>

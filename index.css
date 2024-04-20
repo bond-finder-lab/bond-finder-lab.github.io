@@ -42,7 +42,7 @@ body {
 
 @media(max-width: 400px) {
     .bond-finder-main-card {
-        font-size: calc(12px + 4 / 80 * (100vw - 320px));
+        font-size: calc(13px + 3 / 80 * (100vw - 320px));
     }
 }
 
@@ -52,6 +52,16 @@ table a:hover {
 
 table tr.bond-finder-separator {
     border-top: solid 1px #ced4da;
+}
+
+table th:first-child,
+table td:first-child {
+    padding-left: 0;
+}
+
+table th:last-child,
+table td:last-child {
+    padding-right: 0;
 }
 
 input[type=number]::-webkit-inner-spin-button,
