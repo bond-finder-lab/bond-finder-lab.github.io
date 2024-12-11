@@ -46,6 +46,12 @@
     <label class="form-check-label" for="form_sector3">Корп</label>
   </div>
 </div>
+<div class="form-group form-row flex-nowrap mb-2" v-show="!settings.rub">
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="form_gov_only" v-model="settings.govOnly">
+    <label class="form-check-label" for="form_gov_only">Только госдолг</label>
+  </div>
+</div>
 <div class="form-group form-row flex-nowrap">
   <div class="form-check form-check-inline">
     <input class="form-check-input" type="checkbox" id="form_high_risk" v-model="settings.highRisk">
@@ -93,7 +99,7 @@
     <input class="form-control ml-1" type="number" v-model="settings.year">
   </div>
 </div>
-<div class="form-group form-row" v-show="settings.rub">
+<div class="form-group form-row">
   <label><a href="https://www.banki.ru/dialog/articles/1153/" target="_blank">Уровень листинга</a></label>
   <select class="form-control custom-select" v-model="settings.maxListLevel">
     <option value="1">Только I</option>
@@ -211,32 +217,34 @@
   </tbody>
 </table>
 <button class="btn btn-block btn-secondary" v-show="!reportError &amp;&amp; !showAll" v-on:click="showAll = true">Показать все ({{ totalFits }})</button>
-<button class="btn btn-block btn-secondary mb-4" v-show="totalFits" v-on:click="clipboardButtonClick">Копировать таблицу <span class="position-absolute ml-1" v-show="showClipboardCheck">&check;</span></button><span class="text-danger" v-show="!totalFits &amp;&amp; !reportError">Ничего не найдено. Покрутите настройки.</span><span v-show="reportError">
+<button class="btn btn-block btn-secondary mb-4" v-show="totalFits" v-on:click="clipboardButtonClick">Копировать таблицу <span class="position-absolute ml-1" v-show="showClipboardCheck">&check;</span></button><span class="text-danger" v-show="!totalFits &amp;&amp; !reportError">Ничего не найдено. Покрутите настройки.</span>
+<div v-if="reportError">
   <h5>Здесь будет список облигаций</h5>
   <p>Пожалуйста, подключитесь к Интернету и нажмите кнопку:</p>
   <p>
     <button class="btn btn-lg btn-outline-primary" onclick="location.reload()">Загрузить данные</button>
-  </p></span>
+  </p>
+</div>
 <div v-show="hasABI"><span class="bond-finder-legend-star text-success">*</span>
-  Входит в <a href="https://www.moex.com/ru/index/RUABICP" target="_blank">композитный индекс</a>.
+  Входит в <a href="https://www.moex.com/ru/index/RUABICP" target="_blank">композитный индекс</a>
 </div>
 <div v-show="hasCBHY"><span class="bond-finder-legend-star"><sup class="text-success">вд</sup></span>
-  Входит в <a href="https://www.moex.com/ru/index/RUCBHYCP" target="_blank">индекс ВДО ПИР</a>.
+  Входит в <a href="https://www.moex.com/ru/index/RUCBHYCP" target="_blank">индекс ВДО ПИР</a>
 </div>
 <div v-show="hasQualOnly"><span class="bond-finder-legend-star"><sup class="text-danger">кв</sup></span>
-  Бумаги для <a href="https://www.banki.ru/news/daytheme/?id=10970880" target="_blank">квалов</a>.
+  Бумаги для <a href="https://www.banki.ru/news/daytheme/?id=10970880" target="_blank">квалов</a>
 </div>
 <div v-show="hasFutureAmort">
   <div class="d-none d-sm-block"><span class="bond-finder-legend-star"><sup class="text-alpha-60">A</sup></span>
-    Будет амортизация.
+    Будет амортизация
   </div>
 </div>
-<div v-show="fittedCouponTypes[1]"><span class="bond-finder-legend-star"><sup class="text-danger">↓</sup></span> Купон-<a href="https://bcs-express.ru/novosti-i-analitika/lestnichnyi-kupon-stoit-li-pokupat-takie-obligatsii" target="_blank">лесенка</a>.</div>
-<div v-show="fittedCouponTypes[2]"><span class="bond-finder-legend-star text-danger">**</span> Есть неизвестные купоны.</div>
-<div v-show="fittedCouponTypes[3]"><span class="bond-finder-legend-star"><sup class="text-danger">оф</sup></span> Предусмотрена <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a>.</div>
+<div v-show="fittedCouponTypes[1]"><span class="bond-finder-legend-star"><sup class="text-danger">↓</sup></span> Купон-<a href="https://bcs-express.ru/novosti-i-analitika/lestnichnyi-kupon-stoit-li-pokupat-takie-obligatsii" target="_blank">лесенка</a></div>
+<div v-show="fittedCouponTypes[2]"><span class="bond-finder-legend-star text-danger">**</span> Есть неизвестные купоны</div>
+<div v-show="fittedCouponTypes[3]"><span class="bond-finder-legend-star"><sup class="text-danger">оф</sup></span> Предусмотрена <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a></div>
 <div v-show="hasHighRisk">
   <div class="d-none d-md-block"><span class="bond-finder-legend-star"></span>
-    ПИР &ndash; <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">сектор повышенного риска</a>.
+    ПИР &ndash; <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">сектор повышенного риска</a>
   </div>
 </div>
 <div class="mt-3" v-show="totalFits">
@@ -249,7 +257,7 @@
 </div>
           </div>
         </div>
-        <div class="card mt-2 bg-secondary text-white">
+        <div class="card mt-2 bg-secondary text-white" v-if="!reportError">
           <div class="card-body">
             Вы рискуете своим капиталом.
             Доходность инвестиций не гарантируется.
