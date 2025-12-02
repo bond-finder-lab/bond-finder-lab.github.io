@@ -61,6 +61,10 @@
     <input class="form-check-input" type="checkbox" id="form_qual" v-model="settings.qual">
     <label class="form-check-label" for="form_qual">Квал</label>
   </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="form_offer" v-model="settings.offer">
+    <label class="form-check-label" for="form_offer">Офер</label>
+  </div>
 </div>
 <div class="form-group form-row">
   <label>Погашение (от - до)</label>
@@ -168,8 +172,7 @@
   <select class="form-control custom-select" v-model="settings.couponType">
     <option value="0">Только постоянный</option>
     <option value="1">Без неизвестных</option>
-    <option value="2">Без оферты</option>
-    <option value="3">Любой</option>
+    <option value="2">Любой</option>
   </select>
 </div>
 <div class="form-group form-row">
@@ -239,9 +242,9 @@
     Будет амортизация
   </div>
 </div>
-<div v-show="fittedCouponTypes[1]"><span class="bond-finder-legend-star"><sup class="text-danger">↓</sup></span> Купон-<a href="https://bcs-express.ru/novosti-i-analitika/lestnichnyi-kupon-stoit-li-pokupat-takie-obligatsii" target="_blank">лесенка</a></div>
-<div v-show="fittedCouponTypes[2]"><span class="bond-finder-legend-star text-danger">**</span> Есть неизвестные купоны</div>
-<div v-show="fittedCouponTypes[3]"><span class="bond-finder-legend-star"><sup class="text-danger">оф</sup></span> Предусмотрена <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a></div>
+<div v-show="hasDownstairs"><span class="bond-finder-legend-star"><sup class="text-danger">↓</sup></span> Купон-<a href="https://bcs-express.ru/novosti-i-analitika/lestnichnyi-kupon-stoit-li-pokupat-takie-obligatsii" target="_blank">лесенка</a></div>
+<div v-show="hasNonFixed"><span class="bond-finder-legend-star text-danger">**</span> Есть неизвестные купоны</div>
+<div v-show="hasOffer"><span class="bond-finder-legend-star"><sup class="text-danger">оф</sup></span> Предусмотрена <a href="https://bcs-express.ru/novosti-i-analitika/davaite-pomnit-ob-oferte" target="_blank">оферта</a></div>
 <div v-show="hasHighRisk">
   <div class="d-none d-md-block"><span class="bond-finder-legend-star"></span>
     ПИР &ndash; <a href="https://www.moex.com/ru/markets/risksector/" target="_blank">сектор повышенного риска</a>
@@ -284,7 +287,11 @@
       <sup class="text-danger" v-if="showCouponHint">{{ couponHintText }} </sup>
       {{ couponValueText }}
     </td>
-    <td class="text-right"><strong v-if="row.closeYield">{{ row.closeYield }}</strong><a v-if="!row.closeYield &amp;&amp; row.infoUrl" target="_blank" v-bind:href="row.infoUrl">Инфо</a></td>
+    <td class="text-right">
+      <template v-if="row.closeYield"><sup class="text-danger" v-if="row.hasOffer">оф</sup>
+        <strong>{{ row.closeYield }} </strong>
+      </template><a v-else-if="row.infoUrl" target="_blank" v-bind:href="row.infoUrl">Инфо</a>
+    </td>
   </tr>
 </script>
 <script>/android_asset/.test(location) && document.write("<script src=cordova.js><\/script>")</script>
